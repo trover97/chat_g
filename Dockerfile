@@ -1,27 +1,17 @@
-# Fetching the latest node image on apline linux
-FROM node:alpine AS builder
+# base image
+FROM node:14.17.6-alpine3.14
 
-# Declaring env
-ENV NODE_ENV production
-
-# Setting up the work directory
+# set working directory
 WORKDIR /app
 
-# Installing dependencies
-COPY ./package.json ./
-RUN npm install
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
-# Copying all the files in our project
-COPY . .
+# install app dependencies and build the app for production
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm install --silent && npm install react-scripts@4.0.3 -g --silent && npm install -g serve --silent && npm run build
 
-# Building our application
-RUN npm run build
+# start app
+CMD ["serve", "-s", "build"]
 
-# Fetching the latest nginx image
-FROM nginx
-
-# Copying built assets from builder
-COPY --from=builder /app/build /usr/share/nginx/html
-
-# Copying our nginx.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf

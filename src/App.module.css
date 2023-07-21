@@ -1,0 +1,128 @@
+.contentWrapper {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.chat {
+  position: relative;
+  flex-grow: 1;
+  width: 900px;
+  margin: 16px auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.delimiter {
+  height: 1px;
+  background: #d9d9d9;
+}
+
+.formWrapper {
+  padding: 16px;
+}
+
+.form {
+  display: flex;
+  width: 900px;
+  margin: 0 auto;
+}
+
+.textField {
+  display: flex;
+  padding: 6px 8px 6px 20px;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+
+  border-radius: 24px;
+  border: 1px solid
+    var(--field-custom-ds-field-message-border, rgba(0, 0, 0, 0.04));
+  background: var(--field-custom-ds-field-message-fill, rgba(0, 0, 0, 0.04));
+}
+
+.input {
+  flex: 1;
+  margin-right: 16px;
+
+  color: var(--text-text-secondary, rgba(0, 0, 0, 0.55));
+  font-family: SB Sans Text;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.345px;
+
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
+.sendIconWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+
+  background-color: #8c8c8c;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sendIcon {
+  color: white;
+}
+
+.voiceIconWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46px;
+  height: 46px;
+  margin-left: 10px;
+
+  background-color: #148f2b;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.voiceIcon {
+  color: white;
+}
+
+.alertWrap {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.timer {
+  position: absolute;
+  right: -70px;
+  bottom: 9px;
+
+  color: var(--text-text-secondary, rgba(0, 0, 0, 0.55));
+  font-family: SB Sans Text;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.345px;
+}
+
+.loaderWrap {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}

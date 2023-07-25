@@ -6,7 +6,7 @@ declare global {
   }
 }
 
-const baseURL = "http://94.228.124.35:8000/search";
+const baseURL = "https://whipser-searchchat.ru:80/";
 
 axios.defaults.baseURL = baseURL;
 

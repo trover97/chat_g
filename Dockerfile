@@ -1,27 +1,23 @@
-# Fetching the latest node image on apline linux
-FROM node:alpine AS builder
-
-# Declaring env
-ENV NODE_ENV production
-
-# Setting up the work directory
+FROM node:16-alpine as builder
+# Set the working directory to /app inside the container
 WORKDIR /app
-
-# Installing dependencies
-COPY ./package.json ./
-RUN npm install
-
-# Copying all the files in our project
+# Copy app files
 COPY . .
-
-# Building our application
+# Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
+RUN npm ci 
+# Build the app
 RUN npm run build
 
-# Fetching the latest nginx image
-FROM nginx
-
-# Copying built assets from builder
+# Bundle static assets with nginx
+FROM nginx:1.21.0-alpine as production
+ENV NODE_ENV production
+# Copy built assets from `builder` image
 COPY --from=builder /app/build /usr/share/nginx/html
-
-# Copying our nginx.conf
+# Add your nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY combined_certificate.crt /etc/ssl/certs/combined_certificate.crt
+COPY certificate.key /etc/ssl/private/certificate.key
+# Expose port
+EXPOSE 80
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
